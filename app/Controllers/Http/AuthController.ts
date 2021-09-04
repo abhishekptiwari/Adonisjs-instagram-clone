@@ -5,9 +5,7 @@ import User from 'App/Models/User';
 
 export default class AuthController {
     public signup = async ({ request, response }: HttpContextContract)=>{
-        //console.log(request.body());
         
-       
         const req =await  request.validate({
             schema:schema.create({
                 name:schema.string(),
