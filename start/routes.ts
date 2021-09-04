@@ -7,8 +7,6 @@ Route.on('/signup').render('auth/signup')
 Route.on('/login').render('auth/login')
 Route.on('/profile').render('profile').middleware('auth')
 
-//Route.on('/forgotpassword').render('auth/forgotpass word')
-
 Route.post('/signup','AuthController.signup')
-
 Route.post('/login','AuthController.login')
+Route.post('/logout','AuthController.logout')

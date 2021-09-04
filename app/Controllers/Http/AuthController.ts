@@ -1,11 +1,13 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-
 import { schema,rules } from '@ioc:Adonis/Core/Validator';
 import User from 'App/Models/User';
 
+
 export default class AuthController {
     public signup = async ({ request, response }: HttpContextContract)=>{
+        //console.log(request.body());
         
+       
         const req =await  request.validate({
             schema:schema.create({
                 name:schema.string(),
@@ -52,18 +54,19 @@ export default class AuthController {
                 'password.minLength':'Password must be at least 8 characters'
               }
         })
-
         //const user = await User.findBy('email',req.email)
         const email =req.email;
         const password = req.password;
 
-       const isValid= await auth.attempt(email,password)
-       console.log(isValid);
+        const isValid= await auth.attempt(email,password)
+        console.log(isValid);
        
-
-       
-      return response.redirect('/profile');
+        return response.redirect('/profile');
+    }
     
+    public logout = async ({auth,response}:HttpContextContract)=>{
+        await  auth.logout()
+        return response.redirect('/');
     }
 }
 
