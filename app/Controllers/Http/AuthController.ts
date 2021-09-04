@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import { schema,rules } from '@ioc:Adonis/Core/Validator';
 import User from 'App/Models/User';
+import Mail from '@ioc:Adonis/Addons/Mail'
 
 
 export default class AuthController {
@@ -32,6 +33,15 @@ export default class AuthController {
         user.password=req.password
 
         await user.save()
+
+        //send  verification email
+        await Mail.send((message) => {
+            message
+              .from('verify@adonisgram.com')
+              .to(user.name)
+              .subject('Please verify your email')
+              .htmlView('emails/verify', { name: user})
+          })
 
         return response.redirect('/');
     }
