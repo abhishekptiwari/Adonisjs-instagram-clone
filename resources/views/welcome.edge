@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome To AdonisJS</title>
-</head>
-<body>
-    <h2>Welcome In AdonisJS</h2>
-    @if(auth.isAuthenticated)
-        <h1>{{ auth.user.name }}</h1>
-        <form action="/logout" method="post">
-          <button type="submit">Sign Out</button>
-        </form>
-    @else
-        <br>
-        <a href="/login">Login</a>
-    @endif   
-</body>
-</html>
+@layout('layouts/app')
+    @section('content')
+        <h2>Welcome In AdonisJS</h2>
+        @if(auth.isAuthenticated)
+            <h1>{{ auth.user.name }}</h1>
+            <form action="/logout" method="post">
+            <button type="submit">Sign Out</button>
+            </form>
+        @else
+            <br>
+            <a href="/login">Login</a>
+        @endif   
+    @endsection
