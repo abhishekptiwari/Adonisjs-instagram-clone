@@ -40,7 +40,7 @@ export default class AuthController {
               .from('verify@adonisgram.com')
               .to(user.name)
               .subject('Please verify your email')
-              .htmlView('emails/verify', { name: user})
+              .htmlView('emails/verify', {user})
           })
 
         return response.redirect('/');
